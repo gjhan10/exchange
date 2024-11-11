@@ -1,0 +1,189 @@
+spring:
+  application:
+    name: exchange-service
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+  sql:
+    init:
+      mode: always
+exchange:
+  api-url: https://open.er-api.com/v6/latest
+
+server:
+  port: 8081
+app:
+  valid-currencies:
+    - USD
+    - AED
+    - AFN
+    - AMD
+    - AOA
+    - ARS
+    - AWG
+    - AZN
+    - BAM
+    - BDT
+    - BGN
+    - BHD
+    - BIF
+    - BND
+    - BOB
+    - BTN
+    - BYN
+    - CAD
+    - CDF
+    - CHF
+    - CLP
+    - CNY
+    - COP
+    - CRC
+    - CVE
+    - CZK
+    - DKK
+    - DOP
+    - DZD
+    - EGP
+    - ERN
+    - ETB
+    - EUR
+    - FJD
+    - FKP
+    - FOK
+    - GBP
+    - GEL
+    - GHS
+    - GIP
+    - GMD
+    - GNF
+    - GTQ
+    - GYD
+    - HKD
+    - HNL
+    - HRK
+    - HTG
+    - HUF
+    - IDR
+    - ILS
+    - INR
+    - IQD
+    - IRR
+    - ISK
+    - JMD
+    - JOD
+    - JPY
+    - KES
+    - KGS
+    - KHR
+    - KMF
+    - KRW
+    - KWD
+    - KZT
+    - LAK
+    - LBP
+    - LKR
+    - LRD
+    - LYD
+    - MAD
+    - MDL
+    - MKD
+    - MMK
+    - MNT
+    - MOP
+    - MUR
+    - MVR
+    - MWK
+    - MXN
+    - MYR
+    - MZN
+    - NAD
+    - NGN
+    - NIO
+    - NOK
+    - NPR
+    - OMR
+    - PAB
+    - PEN
+    - PGK
+    - PHP
+    - PKR
+    - PLN
+    - PYG
+    - QAR
+    - RON
+    - RUB
+    - RWF
+    - SAR
+    - SBD
+    - SCR
+    - SDG
+    - SEK
+    - SGD
+    - SLE
+    - SLL
+    - SOS
+    - SRD
+    - SSP
+    - STN
+    - SYP
+    - SZL
+    - THB
+    - TJS
+    - TMT
+    - TND
+    - TRY
+    - TTD
+    - TWD
+    - TZS
+    - UAH
+    - UGX
+    - UYU
+    - UZS
+    - VES
+    - VND
+    - VUV
+    - WST
+    - XAF
+    - XCD
+    - XOF
+    - XPF
+    - YER
+    - ZAR
+    - ZMW
+    - ZWL
+
+logging:
+  level:
+    root: INFO # Configura el nivel de log global para toda la aplicaci�n
+    com.tecnica.exchange: DEBUG # Configura el nivel de log para tu paquete espec�fico
+    org.springframework.web: INFO # Para logs de las peticiones HTTP
+    org.springframework.boot: INFO # Para logs del arranque de Spring Boot
+    reactor.netty: WARN # Logs para conexiones de Netty (si usas WebFlux)
+resilience4j:
+  circuitbreaker:
+    instances:
+      empleado-service:
+        sliding-window-type: COUNT_BASED  # Tipo de ventana deslizante  o TIME_BASED
+        failure-rate-threshold: 50 # Tasa de fallo permitida para abrir el circuito Porcentaje (0-100)
+        minimum-number-of-calls: 5 # N�mero m�nimo de llamadas antes de calcular la tasa de fallos
+        automatic-transition-from-open-to-half-open-enabled: true # Activar transici�n autom�tica de estado abierto a semiabierto
+        wait-duration-in-open-state: 5s   # Duraci�n de tiempo que el circuito estar� abierto, Duraci�n en milisegundos o segundos
+        permitted-number-of-calls-in-half-open-state: 3 # N�mero permitido de llamadas en estado semiabierto
+        sliding-window-size: 10  # Tama�o de la ventana deslizante Cantidad total de llamadas en la ventana
+        register-health-indicator: true # Registrar un indicador de salud
+        # Intervalo de tiempo para considerar las llamadas como lentas
+        # N�mero m�nimo de llamadas lentas antes de calcular la tasa
+        minimum-slow-calls: 5
+        # Tiempo que debe transcurrir para que las llamadas se consideren lentas
+        slow-call-duration-threshold: 3s
+        # Proporci�n de llamadas lentas permitidas
+        slow-call-percentage-threshold: 10

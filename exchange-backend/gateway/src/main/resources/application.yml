@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: exchange-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/exchange/**
+          filters:
+            - ValidationFilter
+        - id: auth-service
+          uri: lb://LOGIN-SERVICE
+          predicates:
+            - Path=/api/users/**
+server:
+  port: 9092
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: DEBUG
+    org.springframework.security.web.server.authorization.AuthorizationWebFilter: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG

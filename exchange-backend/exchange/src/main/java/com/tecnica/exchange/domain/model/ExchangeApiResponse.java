@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
-public class ExchangeResponse {
+public class ExchangeApiResponse {
     @Id
     private Long id;
     private BigDecimal amount;

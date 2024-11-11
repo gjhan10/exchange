@@ -1,4 +1,4 @@
-package com.tecnica.exchange.domain.exceptions;
+package com.tecnica.exchange.shared.util;
 
 import lombok.*;
 

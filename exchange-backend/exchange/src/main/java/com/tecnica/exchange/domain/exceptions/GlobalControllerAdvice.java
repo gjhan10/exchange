@@ -1,5 +1,7 @@
 package com.tecnica.exchange.domain.exceptions;
 
+import com.tecnica.exchange.shared.util.ApiException;
+import com.tecnica.exchange.shared.util.ErrorDetail;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

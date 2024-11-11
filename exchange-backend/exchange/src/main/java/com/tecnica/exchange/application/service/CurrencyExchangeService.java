@@ -1,12 +1,12 @@
 package com.tecnica.exchange.application.service;
 
 import com.tecnica.exchange.domain.model.ExchangeRequest;
-import com.tecnica.exchange.domain.model.ExchangeResponse;
+import com.tecnica.exchange.domain.model.ExchangeApiResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface CurrencyExchangeService {
-    Mono<ExchangeResponse> convertCurrency(ExchangeRequest request);
+    Mono<ExchangeApiResponse> convertCurrency(ExchangeRequest request);
 
-    Flux<ExchangeResponse> listQueryRecords();
+    Flux<ExchangeApiResponse> listQueryRecords();
 }

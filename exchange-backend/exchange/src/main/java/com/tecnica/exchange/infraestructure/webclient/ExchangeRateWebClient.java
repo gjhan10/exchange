@@ -1,6 +1,6 @@
 package com.tecnica.exchange.infraestructure.webclient;
 
-import com.tecnica.exchange.shared.dto.ExchangeRateResponse;
+import com.tecnica.exchange.domain.model.ExchangeRateResponse;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

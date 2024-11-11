@@ -2,7 +2,7 @@ package com.tecnica.exchange.application.service.impl;
 
 import com.tecnica.exchange.application.service.CurrencyExchangeService;
 import com.tecnica.exchange.domain.model.ExchangeRequest;
-import com.tecnica.exchange.domain.model.ExchangeResponse;
+import com.tecnica.exchange.domain.model.ExchangeApiResponse;
 import com.tecnica.exchange.domain.repository.ExchangeRecordRepository;
 import com.tecnica.exchange.infraestructure.adapter.ExchangeResponseAdapter;
 import com.tecnica.exchange.infraestructure.webclient.ExchangeRateWebClient;
@@ -19,13 +19,13 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
     private final ExchangeRecordRepository repository;
     private final ExchangeResponseAdapter adapter;
 
-    public Mono<ExchangeResponse> convertCurrency(ExchangeRequest request) {
-        return exchangeRateClient.getExchangeRate(request.getSourceCurrency().toString())
+    public Mono<ExchangeApiResponse> convertCurrency(ExchangeRequest request) {
+        return exchangeRateClient.getExchangeRate(request.getSourceCurrency())
                 .flatMap(response -> repository.save(adapter.convertExchangeRecordResponse(response, request)));
     }
 
     @Override
-    public Flux<ExchangeResponse> listQueryRecords() {
+    public Flux<ExchangeApiResponse> listQueryRecords() {
         return repository.findAll();
     }
 }

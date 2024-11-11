@@ -1,5 +1,6 @@
-package com.tecnica.exchange.domain.exceptions;
+package com.tecnica.exchange.infraestructure.config;
 
+import com.tecnica.exchange.shared.util.ValidCurrency;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.Getter;

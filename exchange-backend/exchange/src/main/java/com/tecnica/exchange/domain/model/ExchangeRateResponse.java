@@ -1,4 +1,4 @@
-package com.tecnica.exchange.shared.dto;
+package com.tecnica.exchange.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;

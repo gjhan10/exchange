@@ -1,6 +1,6 @@
 package com.tecnica.exchange.domain.model;
 
-import com.tecnica.exchange.domain.exceptions.ValidCurrency;
+import com.tecnica.exchange.shared.util.ValidCurrency;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 

@@ -14,10 +14,29 @@ import reactor.core.publisher.Mono;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Global exception handler for handling validation and generic exceptions.
+ * Provides centralized exception handling for various errors in the application.
+ * <p>
+ * Author: JJGF
+ * Date: 2024-11-13
+ * Class: GlobalControllerAdvice
+ * </p>
+ *
+ * @see ApiException
+ * @see ErrorDetail
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalControllerAdvice {
 
+    /**
+     * Handles validation exceptions (e.g., field errors, constraint violations).
+     * Returns a detailed error response with HTTP 400.
+     *
+     * @param ex the exception thrown
+     * @return a {@link Mono} with a {@link ResponseEntity} containing the error details
+     */
     @ExceptionHandler({WebExchangeBindException.class, ConstraintViolationException.class})
     public Mono<ResponseEntity<ApiException>> handleValidationException(Exception ex) {
 
@@ -41,6 +60,12 @@ public class GlobalControllerAdvice {
                 .body(apiException));
     }
 
+    /**
+     * Handles generic exceptions and returns a 500 error response.
+     *
+     * @param ex the exception thrown
+     * @return a {@link Mono} with a {@link ResponseEntity} containing the error details
+     */
     @ExceptionHandler(Exception.class)
     public Mono<ResponseEntity<ApiException>> handleGenericException(Exception ex) {
         ErrorDetail errorDetail = new ErrorDetail("unknown", ex.getMessage());
@@ -55,5 +80,7 @@ public class GlobalControllerAdvice {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(apiException));
     }
+
+
 }
 
